@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const { boolean } = require('webidl-conversions');
+const { stringify } = require('qs');
 
 const ROUNDS = 10;
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -25,6 +27,7 @@ const userSchema = mongoose.Schema(
             required: [true, "required field"],
             minlength: [8, "invalid length"],
         },
+
     },
     {
         timestamps: true,
