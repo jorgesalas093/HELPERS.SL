@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const createError = require('http-errors')
 const { StatusCodes } = require('http-status-codes')
-const User = require("../models/User.model");
+const User = require("../models/user.model");
 
 module.exports.login = (req, res, next) => {
     const { email, password } = req.body;
@@ -35,7 +35,7 @@ module.exports.login = (req, res, next) => {
                             const token = jwt.sign(
                                 { id: user.id },
                                 process.env.JWT_SECRET || 'password',
-                                { expiresIn: '1d' }
+                                { expiresIn: '6d' }
                             )
 
                             res.json({ accessToken: token });

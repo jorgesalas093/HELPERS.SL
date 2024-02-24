@@ -1,8 +1,12 @@
 const router = require('express').Router();
+
 const usersController = require('../controllers/users.controller');
 const authController = require('../controllers/auth.controller');
-const authMiddleware = require('../middlewares/auth.middleware');
+const chatsController = require("../controllers/chats.controles")
 const messageControler = require("../controllers/message.controller");
+
+const authMiddleware = require('../middlewares/auth.middleware');
+
 const upload = require('./storage.config');
 
 // Auth
@@ -20,6 +24,7 @@ router.post('/message/:chatId', authMiddleware.isAuthenticated, messageControler
 router.get('/message', authMiddleware.isAuthenticated, messageControler.getCurrentUserMessageById)
 
 //CHAT
-//// router.get('/chats/me', authMiddleware.isAuthenticated, chatsController.getCurrentUserChats)
+router.get('/chats/:chatId', authMiddleware.isAuthenticated, chatsController.getCurrentUserChats)
+router.post('/chats/:userId', authMiddleware.isAuthenticated, chatsController.createChat)
 
 module.exports = router;
