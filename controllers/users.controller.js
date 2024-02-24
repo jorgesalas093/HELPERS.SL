@@ -1,6 +1,6 @@
 const { StatusCodes } = require('http-status-codes');
 const createError = require('http-errors');
-const User = require("../models/user.model")
+const User = require("../models/User.model")
 
 module.exports.create = (req, res, next) => {
     User.findOne({ $or: [{ username: req.body.username }, { email: req.body.email }] })

@@ -2,8 +2,9 @@ const router = require('express').Router();
 
 const usersController = require('../controllers/users.controller');
 const authController = require('../controllers/auth.controller');
-const chatsController = require("../controllers/chats.controles")
+const chatsController = require("../controllers/chat.controles")
 const messageControler = require("../controllers/message.controller");
+const commentController = require("../controllers/comment.controler");
 
 const authMiddleware = require('../middlewares/auth.middleware');
 
@@ -26,5 +27,14 @@ router.get('/message', authMiddleware.isAuthenticated, messageControler.getCurre
 //CHAT
 router.get('/chats/:chatId', authMiddleware.isAuthenticated, chatsController.getCurrentUserChats)
 router.post('/chats/:userId', authMiddleware.isAuthenticated, chatsController.createChat)
+
+//COMMENTS
+router.get('/comment/:userId', authMiddleware.isAuthenticated, commentController.getComment)
+router.post('/comment/:userId', authMiddleware.isAuthenticated, commentController.createComment)
+
+//LIKES BY RATE
+
+//componente de react mapbox
+
 
 module.exports = router;

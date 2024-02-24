@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const { boolean } = require('webidl-conversions');
-const { stringify } = require('qs');
 const { Schema } = mongoose;
 
 const ROUNDS = 10;
@@ -42,7 +40,7 @@ const userSchema = mongoose.Schema(
         birthday: {
             type: Date
         },
-        imageURL: {
+        avatar: {
             type: String,
             requiered: false,
             unique: false,
@@ -55,7 +53,7 @@ const userSchema = mongoose.Schema(
         },
         typejob: {
             type: String,
-            enum: ['ELECTRICISTA', 'BUTANERO', 'MANITAS EN GENERAL']
+            enum: ['CARER', 'CARPENTER', 'LOOKSMITH', 'CHEF', 'TEACHER', 'ELECTRICIAN', 'PLUMBER', 'MESSENGER', 'FITTER', 'CLOSET ORGANIZER', 'HOME CLEANER', 'GERDENER', 'PAINTER', 'BRICKWORK', 'WELDER']
         }
 
     },

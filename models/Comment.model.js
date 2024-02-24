@@ -1,11 +1,15 @@
-const mongoose = requiere("mongoose");
+const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
 const commentSchema = new Schema(
     {
-        user: {
+        writer: {
             type: Schema.Types.ObjectId,
-            red: 'User'
+            ref: 'User'
+        },
+        receiver: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
         },
         date: {
             type: Date,
