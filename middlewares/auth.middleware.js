@@ -20,6 +20,8 @@ module.exports.isAuthenticated = (req, res, next) => {
         return next(createError(StatusCodes.UNAUTHORIZED, "A token must be provided"));
     }
 
+    console.log(token)
+
     // Comprobación del JWT
 
     jwt.verify(

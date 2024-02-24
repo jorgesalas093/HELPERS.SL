@@ -5,6 +5,8 @@ const Chat = require("../models/chat.model");
 
 
 
+
+
 module.exports.create = (req, res, next) => {
     Message.create({ text: req.body.text, user: req.currentUserId, chatId: req.params.chatId })
         .then(message => {
@@ -14,9 +16,9 @@ module.exports.create = (req, res, next) => {
 }
 
 module.exports.getCurrentUserMessageById = (req, res, next) => {
-Message.find({user: req.currentUserId}).sort({createdAt: "desc"})
-.then(messages => {
-    res.json(messages);
-})
-.catch(next);
+    Message.find({ user: req.currentUserId }).sort({ createdAt: "desc" })
+        .then(messages => {
+            res.json(messages);
+        })
+        .catch(next);
 }

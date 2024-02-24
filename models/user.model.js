@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const { boolean } = require('webidl-conversions');
 const { stringify } = require('qs');
+const { Schema } = mongoose;
 
 const ROUNDS = 10;
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -12,6 +13,7 @@ const userSchema = mongoose.Schema(
             type: String,
             unique: true,
             required: [true, 'Required field'],
+            minlength: [3, "Name must have at least 3 characters"],
             trim: true // para borrar espacios blancos innecesarios al principio o final de la palabra
         },
         email: {
@@ -27,10 +29,38 @@ const userSchema = mongoose.Schema(
             required: [true, "required field"],
             minlength: [8, "invalid length"],
         },
+        role: {
+            type: String,
+            enum: ['USER', 'ADMIN'],
+            default: 'USER'
+        },
+        biography: {
+            type: String,
+            default: '',
+            maxlength: 250
+        },
+        birthday: {
+            type: Date
+        },
+        imageURL: {
+            type: String,
+            requiered: false,
+            unique: false,
+        },
+        comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+        job: {
+            type: Boolean,
+            requiere: false,
+            default: false
+        },
+        typejob: {
+            type: String,
+            enum: ['ELECTRICISTA', 'BUTANERO', 'MANITAS EN GENERAL']
+        }
 
     },
     {
-        timestamps: true,
+
         toJSON: {
             virtuals: true,
             transform: (doc, ret) => {
