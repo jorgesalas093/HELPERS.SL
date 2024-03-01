@@ -38,7 +38,9 @@ const userSchema = mongoose.Schema(
             maxlength: 250
         },
         birthday: {
-            type: Date
+            type: Date,
+            requiered: false,
+            unique: false,
         },
         avatar: {
             type: String,
@@ -46,16 +48,19 @@ const userSchema = mongoose.Schema(
             unique: false,
         },
         comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
-        job: {
-            type: Boolean,
-            requiere: false,
-            default: false
-        },
+        // job: {
+        //     type: [String],
+        //     requiere: false,
+        //     default: false,
+        //     typejob: []
+        // },
         typejob: {
-            type: String,
+            type: [String],
+            requiere: false,
+            default: [],
             enum: ['CARER', 'CARPENTER', 'LOOKSMITH', 'CHEF', 'TEACHER', 'ELECTRICIAN', 'PLUMBER', 'MESSENGER', 'FITTER', 'CLOSET ORGANIZER', 'HOME CLEANER', 'GERDENER', 'PAINTER', 'BRICKWORK', 'WELDER']
         }
-
+        //select de tipo multiple check box
     },
     {
 

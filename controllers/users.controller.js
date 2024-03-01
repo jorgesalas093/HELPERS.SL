@@ -29,6 +29,26 @@ const getUser = (id, req, res, next) => {
         .catch(next)
 }
 
+//usar el &:in typo trabajo pillado por el params
+
+module.exports.getAllJobsUsers = (req, res, next) => {
+    User.find({ 'typejob.0': { $exists: true } })
+        .then(users => {
+            res.json(users)
+        })
+        .catch(next)
+}
+
+module.exports.getJobsByType = (req, res, next) => {
+    const typejob = req.params.typejob.toUpperCase();
+
+    User.find({ typejob: { $in: [typejob] } })
+        .then(users => {
+            res.json(users);
+        })
+        .catch(next);
+}
+
 module.exports.getCurrentUser = (req, res, next) => {
     getUser(req.currentUserId, req, res, next);
 }

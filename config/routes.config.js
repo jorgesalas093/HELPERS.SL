@@ -6,6 +6,7 @@ const chatsController = require("../controllers/chat.controles")
 const messageControler = require("../controllers/message.controller");
 const commentController = require("../controllers/comment.controler");
 
+
 const authMiddleware = require('../middlewares/auth.middleware');
 
 const upload = require('./storage.config');
@@ -18,6 +19,9 @@ router.post('/login', authController.login);
 router.get('/users/me', authMiddleware.isAuthenticated, usersController.getCurrentUser)
 router.get('/users/:id', authMiddleware.isAuthenticated, usersController.getUser)
 router.post('/users', usersController.create);
+router.get('/users', usersController.getAllJobsUsers);
+//de aqui puedo pillarlo por el params que me viene por la ruta del front, toca hacer la logica del controler para que lo pille por cada uno de los tipos de trabajo 
+router.get('/users/jobs/:typejob', usersController.getJobsByType);
 
 
 //Message
