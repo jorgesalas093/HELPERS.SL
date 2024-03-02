@@ -1,6 +1,7 @@
 const { StatusCodes } = require('http-status-codes');
 const createError = require('http-errors');
-const User = require("../models/User.model")
+const User = require("../models/User.model");
+const { populate } = require('../models/Comment.model');
 
 module.exports.create = (req, res, next) => {
     User.findOne({ $or: [{ username: req.body.username }, { email: req.body.email }] })
@@ -19,6 +20,7 @@ module.exports.create = (req, res, next) => {
 
 const getUser = (id, req, res, next) => {
     User.findById(id)
+        .populate({ path: 'comments', populate: { path: 'writer' } })
         .then(user => {
             if (!user) {
                 next(createError(StatusCodes.NOT_FOUND, 'User not found'))

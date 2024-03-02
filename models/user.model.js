@@ -47,20 +47,15 @@ const userSchema = mongoose.Schema(
             requiered: false,
             unique: false,
         },
-        comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
-        // job: {
-        //     type: [String],
-        //     requiere: false,
-        //     default: false,
-        //     typejob: []
-        // },
+        // comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+
         typejob: {
             type: [String],
             requiere: false,
             default: [],
             enum: ['CARER', 'CARPENTER', 'LOOKSMITH', 'CHEF', 'TEACHER', 'ELECTRICIAN', 'PLUMBER', 'MESSENGER', 'FITTER', 'CLOSET ORGANIZER', 'HOME CLEANER', 'GERDENER', 'PAINTER', 'BRICKWORK', 'WELDER']
         }
-        //select de tipo multiple check box
+
     },
     {
 
@@ -98,7 +93,16 @@ userSchema.pre("save", function (next) {
     } else {
         next();
     }
+
+
 });
+
+userSchema.virtual('comments', {
+    ref: 'Comment',
+    localField: '_id',
+    foreignField: 'receiver',
+    justOne: false
+})
 
 const User = mongoose.model('User', userSchema);
 module.exports = User
