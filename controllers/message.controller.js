@@ -1,7 +1,7 @@
 const { StatusCodes } = require('http-status-codes');
 const createError = require('http-errors');
 const Message = require("../models/Message.model");
-const Chat = require("../models/chat.model");
+const Chat = require("../models/Chat.model");
 
 
 
