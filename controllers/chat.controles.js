@@ -5,16 +5,19 @@ const Chat = require("../models/chat.model");
 
 
 module.exports.createChat = (req, res, next) => {
-    Chat.create({ user1: req.currentUserId, user2: req.params.userId })
+    Chat.create({ users: [req.currentUserId, req.params.userId] })
         .then(chat => res.json(chat))
         .catch(next)
 }
 
+module.exports.allChats = (req, res, next) => {
+    Chat.find({ users: { $in: [req.currentUserId] } })
+}
 
-module.exports.getCurrentUserChats = (req, res, next) => {
+
+module.exports.getChat = (req, res, next) => {
     Chat.findById(req.params.chatId)
-        .populate('user1')
-        .populate('user2')
+        .populate('users')
         .populate('messages')
         .then(chat => res.json(chat))
 }

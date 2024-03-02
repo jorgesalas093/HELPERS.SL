@@ -3,16 +3,12 @@ const mongoose = require('mongoose');
 
 const chatSchema = mongoose.Schema(
   {
-    user1: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'User',
-      required: [true, 'Required field'],
-    },
-    user2: {
-      type: mongoose.SchemaTypes.ObjectId,
+    users: {
+      type: [mongoose.SchemaTypes.ObjectId],
       ref: 'User',
       required: [true, 'Required field'],
     }
+    
   },
   {
     timestamps: true,

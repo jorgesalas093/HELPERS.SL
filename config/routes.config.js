@@ -29,7 +29,8 @@ router.post('/message/:chatId', authMiddleware.isAuthenticated, messageControler
 router.get('/message', authMiddleware.isAuthenticated, messageControler.getCurrentUserMessageById)
 
 //CHAT
-router.get('/chats/:chatId', authMiddleware.isAuthenticated, chatsController.getCurrentUserChats)
+router.get('/chats/me', authMiddleware.isAuthenticated, chatsController.allChats)
+router.get('/chats/:chatId', authMiddleware.isAuthenticated, chatsController.getChat)
 router.post('/chats/:userId', authMiddleware.isAuthenticated, chatsController.createChat)
 
 //COMMENTS
