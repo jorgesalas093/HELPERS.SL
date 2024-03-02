@@ -1,6 +1,6 @@
 const { StatusCodes } = require('http-status-codes');
 const createError = require('http-errors');
-const User = require("../models/User.model");
+const User = require("../models/user.model");
 const { populate } = require('../models/Comment.model');
 
 module.exports.create = (req, res, next) => {

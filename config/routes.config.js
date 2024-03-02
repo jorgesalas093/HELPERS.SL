@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const usersController = require('../controllers/users.controller');
 const authController = require('../controllers/auth.controller');
-const chatsController = require("../controllers/chat.controles")
+const chatsController = require("../controllers/chat.controller")
 const messageControler = require("../controllers/message.controller");
 const commentController = require("../controllers/comment.controler");
 
