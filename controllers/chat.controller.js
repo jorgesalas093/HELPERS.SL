@@ -5,9 +5,19 @@ const Chat = require("../models/Chat.model");
 
 
 module.exports.createChat = (req, res, next) => {
-    Chat.create({ users: [req.currentUserId, req.params.userId] })
-        .then(chat => res.json(chat))
+    Chat.findOne({ users: { $all: [req.currentUserId, req.params.userId] } })
+        .then(chat => {
+
+            if (!chat) {
+                return Chat.create({ users: [req.currentUserId, req.params.userId] })
+                    .then(chat => res.json(chat))
+            } else {
+                console.log('ya tienes un chat')
+                res.json(chat)
+            }
+        })
         .catch(next)
+
 }
 
 module.exports.allChats = (req, res, next) => {

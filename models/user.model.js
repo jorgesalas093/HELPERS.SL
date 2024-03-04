@@ -44,8 +44,7 @@ const userSchema = mongoose.Schema(
         },
         avatar: {
             type: String,
-            requiered: false,
-            unique: false,
+            default: 'https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png'
         },
         // comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 
@@ -63,9 +62,7 @@ const userSchema = mongoose.Schema(
             virtuals: true,
             transform: (doc, ret) => {
                 // Sirve para cambiar el output de los endpoints cuando hago res.json
-                ret.id = ret._id;
                 delete ret.__v;
-                delete ret._id;
                 delete ret.password;
             },
         },

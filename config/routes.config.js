@@ -18,10 +18,12 @@ router.post('/login', authController.login);
 // Users
 router.get('/users/me', authMiddleware.isAuthenticated, usersController.getCurrentUser)
 router.get('/users/:id', authMiddleware.isAuthenticated, usersController.getUser)
-router.post('/users', usersController.create);
+//PORQUE DA FALLO LA FOTO 
+router.post('/users', upload.single('avatar'), usersController.create);
 router.get('/users', usersController.getAllJobsUsers);
 //de aqui puedo pillarlo por el params que me viene por la ruta del front, toca hacer la logica del controler para que lo pille por cada uno de los tipos de trabajo 
 router.get('/users/jobs/:typejob', usersController.getJobsByType);
+router.put('/users/me', authMiddleware.isAuthenticated, usersController.editUser);
 
 
 //Message
@@ -36,6 +38,7 @@ router.post('/chats/:userId', authMiddleware.isAuthenticated, chatsController.cr
 //COMMENTS
 router.get('/comment/:userId', authMiddleware.isAuthenticated, commentController.getComment)
 router.post('/comment/:userId', authMiddleware.isAuthenticated, commentController.createComment)
+router.delete('/comment/:commentId', authMiddleware.isAuthenticated, commentController.deleteComment)
 
 //LIKES BY RATE
 
