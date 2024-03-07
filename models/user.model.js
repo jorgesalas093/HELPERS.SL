@@ -46,15 +46,14 @@ const userSchema = mongoose.Schema(
             type: String,
             default: 'https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png'
         },
-        // comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
-
+       
         typejob: {
             type: [String],
             requiere: false,
             default: [],
             enum: ['CARER', 'CARPENTER', 'LOOKSMITH', 'CHEF', 'TEACHER', 'ELECTRICIAN', 'PLUMBER', 'MESSENGER', 'FITTER', 'CLOSET ORGANIZER', 'HOME CLEANER', 'GERDENER', 'PAINTER', 'BRICKWORK', 'WELDER']
         }
-
+//imput type check box (primero probar con uno normal)
     },
     {
 

@@ -28,6 +28,11 @@ module.exports.allChats = (req, res, next) => {
 module.exports.getChat = (req, res, next) => {
     Chat.findById(req.params.chatId)
         .populate('users')
-        .populate('messages')
+        .populate({
+            path: "messages",
+            populate: {
+                path: "user"
+            }
+        })
         .then(chat => res.json(chat))
 }

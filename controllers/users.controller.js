@@ -75,3 +75,15 @@ module.exports.editUser = (req, res, next) => {
             next(error);
         });
 }
+
+// module.exports.getEnumValues = (req, res, next) => {
+//     userSchema
+//         .path('typejob')
+//         .enumValues
+//         .then(enumValues => {
+//             res.json({ typejobEnum: enumValues });
+//         })
+//         .catch(error => {
+//             next(error);
+//         });
+// };

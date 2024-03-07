@@ -16,8 +16,8 @@ const messsageSchema = mongoose.Schema(
         text: {
             type: String,
             required: [true, 'Required field'],
-        }
-    },
+        },
+    }, { timestamps: true }
 
 );
 

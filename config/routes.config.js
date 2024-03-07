@@ -18,12 +18,13 @@ router.post('/login', authController.login);
 // Users
 router.get('/users/me', authMiddleware.isAuthenticated, usersController.getCurrentUser)
 router.get('/users/:id', authMiddleware.isAuthenticated, usersController.getUser)
-//PORQUE DA FALLO LA FOTO 
 router.post('/users', upload.single('avatar'), usersController.create);
 router.get('/users', usersController.getAllJobsUsers);
-//de aqui puedo pillarlo por el params que me viene por la ruta del front, toca hacer la logica del controler para que lo pille por cada uno de los tipos de trabajo 
+//de aqui puedo pillarlo por el params que me viene por la ruta del front, toca hacer la 
+//logica del controler para que lo pille por cada uno de los tipos de trabajo 
 router.get('/users/jobs/:typejob', usersController.getJobsByType);
 router.put('/users/me', authMiddleware.isAuthenticated, usersController.editUser);
+// router.get('/users/typesjob', authMiddleware.isAuthenticated, usersController.getEnumValues);
 
 
 //Message
