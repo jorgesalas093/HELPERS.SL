@@ -20,8 +20,6 @@ router.get('/users/me', authMiddleware.isAuthenticated, usersController.getCurre
 router.get('/users/:id', authMiddleware.isAuthenticated, usersController.getUser)
 router.post('/users', upload.single('avatar'), usersController.create);
 router.get('/users', usersController.getAllJobsUsers);
-//de aqui puedo pillarlo por el params que me viene por la ruta del front, toca hacer la 
-//logica del controler para que lo pille por cada uno de los tipos de trabajo 
 router.get('/users/jobs/:typejob', usersController.getJobsByType);
 router.put('/users/me', authMiddleware.isAuthenticated, usersController.editUser);
 // router.get('/users/typesjob', authMiddleware.isAuthenticated, usersController.getEnumValues);
@@ -32,7 +30,7 @@ router.post('/message/:chatId', authMiddleware.isAuthenticated, messageControler
 router.get('/message', authMiddleware.isAuthenticated, messageControler.getCurrentUserMessageById)
 
 //CHAT
-router.get('/chats/me', authMiddleware.isAuthenticated, chatsController.allChats)
+router.get('/chats', authMiddleware.isAuthenticated, chatsController.allChats)
 router.get('/chats/:chatId', authMiddleware.isAuthenticated, chatsController.getChat)
 router.post('/chats/:userId', authMiddleware.isAuthenticated, chatsController.createChat)
 

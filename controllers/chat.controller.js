@@ -21,9 +21,15 @@ module.exports.createChat = (req, res, next) => {
 }
 
 module.exports.allChats = (req, res, next) => {
-    Chat.find({ users: { $in: [req.currentUserId] } })
+    Chat.find({ users: { $in: [req.currentUserId] } }, '_id') // Solo obtenemos los _id de los chats
+        .then(chats => {
+            const chatIds = chats.map(chat => chat._id);
+            res.json(chatIds);
+        })
+        .catch(error => {
+            next(error);
+        });
 }
-
 
 module.exports.getChat = (req, res, next) => {
     Chat.findById(req.params.chatId)
@@ -36,3 +42,4 @@ module.exports.getChat = (req, res, next) => {
         })
         .then(chat => res.json(chat))
 }
+

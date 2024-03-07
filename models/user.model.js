@@ -100,5 +100,7 @@ userSchema.virtual('comments', {
     justOne: false
 })
 
+
+
 const User = mongoose.model('User', userSchema);
 module.exports = User
