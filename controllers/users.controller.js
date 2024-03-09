@@ -1,7 +1,8 @@
 const { StatusCodes } = require('http-status-codes');
 const createError = require('http-errors');
-const User = require("../models/user.model");
+const User = require("../models/User.model");
 const { populate } = require('../models/Comment.model');
+const {transporter, createEmailTemplate} = require('../config/nodemailar.config')
 
 module.exports.create = (req, res, next) => {
     const userToCreate = {
@@ -16,12 +17,30 @@ module.exports.create = (req, res, next) => {
             } else {
                 return User.create(userToCreate)
                     .then(userCreated => {
-                        res.status(StatusCodes.CREATED).json(userCreated)
+                        transporter.sendMail(
+                            {
+                                from: process.env.NODEMAILER_EMAIL,
+                                to: userCreated.email,
+                                subject: "Bienvenido a tu aplicación",
+                                html: createEmailTemplate(userCreated),
+                            },
+                            function (error, info) {
+                                if (error) {
+                                    console.error('Error al enviar el correo:', error);
+                                } else {
+                                    console.log('Correo electrónico enviado:', info.response);
+                                }
+                                // Responde al cliente
+                                res.status(StatusCodes.CREATED).json(userCreated);
+                            }
+                        );
                     })
+                    .catch(next);
             }
         })
-        .catch(next)
-}
+        .catch(next);
+};
+
 const getUser = (id, req, res, next) => {
     User.findById(id)
         .populate({ path: 'comments', populate: { path: 'writer' } })

@@ -8,7 +8,7 @@ const chatSchema = mongoose.Schema(
       ref: 'User',
       required: [true, 'Required field'],
     }
-    
+
   },
   {
     timestamps: true,

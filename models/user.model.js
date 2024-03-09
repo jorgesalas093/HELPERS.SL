@@ -52,7 +52,20 @@ const userSchema = mongoose.Schema(
             requiere: false,
             default: [],
             enum: ['CARER', 'CARPENTER', 'LOOKSMITH', 'CHEF', 'TEACHER', 'ELECTRICIAN', 'PLUMBER', 'MESSENGER', 'FITTER', 'CLOSET ORGANIZER', 'HOME CLEANER', 'GERDENER', 'PAINTER', 'BRICKWORK', 'WELDER']
-        }
+        }, 
+        activationToken: {
+            type: String,
+            default: () => {
+                return (
+                    Math.random().toString(36).substring(2, 15) +
+                    Math.random().toString(36).substring(2, 15)
+                );
+            },
+        },
+        isActive: {
+            type: Boolean,
+            default: false,
+        },
 //imput type check box (primero probar con uno normal)
     },
     {

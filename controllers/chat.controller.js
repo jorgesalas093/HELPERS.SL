@@ -20,16 +20,37 @@ module.exports.createChat = (req, res, next) => {
 
 }
 
+// module.exports.allChats = (req, res, next) => {
+//     Chat.find({ users: { $in: [req.currentUserId] } })
+//         .populate('users')
+//         .populate({
+//             path: 'messages',
+//             populate: {
+//                 path: 'user',
+//                 select: '-password' // Si deseas excluir la contraseña del usuario
+//             }
+//         })
+//         .then(chats => {
+
+//             res.json(chats);
+//         })
+//         .catch(error => {
+//             next(error);
+//         });
+// }
+
 module.exports.allChats = (req, res, next) => {
-    Chat.find({ users: { $in: [req.currentUserId] } }, '_id') // Solo obtenemos los _id de los chats
+    Chat.find({ users: { $in: [req.currentUserId] } }) // Solo obtenemos los _id de los chats
+        .populate('users')
         .then(chats => {
-            const chatIds = chats.map(chat => chat._id);
-            res.json(chatIds);
+            // const chatIds = chats.map(chat => chat._id);
+            res.json(chats);
         })
         .catch(error => {
             next(error);
         });
 }
+
 
 module.exports.getChat = (req, res, next) => {
     Chat.findById(req.params.chatId)

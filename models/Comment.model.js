@@ -19,9 +19,7 @@ const commentSchema = new Schema(
             type: String,
             requiered: true,
             maxLength: 250
-        },//METER LOS COMMENTS
-
-
+        },
 
     },
 

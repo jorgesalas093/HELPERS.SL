@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const DB_NAME = "helpers";
-const URI = process.env.MONGODB_URI
-  || "mongodb://127.0.0.1:27017"
+const URI = 
+process.env.MONGODB_URI ||   "mongodb://127.0.0.1:27017"
   ;
 const DB_URI = `${URI}/${DB_NAME}`;
 

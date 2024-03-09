@@ -5,7 +5,7 @@ const authController = require('../controllers/auth.controller');
 const chatsController = require("../controllers/chat.controller")
 const messageControler = require("../controllers/message.controller");
 const commentController = require("../controllers/comment.controler");
-
+const rateController = require("../controllers/rate.controller")
 
 const authMiddleware = require('../middlewares/auth.middleware');
 
@@ -13,7 +13,7 @@ const upload = require('./storage.config');
 
 // Auth
 router.post('/login', authController.login);
-
+router.get("/activate/:token", authController.activate);
 
 // Users
 router.get('/users/me', authMiddleware.isAuthenticated, usersController.getCurrentUser)
@@ -22,7 +22,7 @@ router.post('/users', upload.single('avatar'), usersController.create);
 router.get('/users', usersController.getAllJobsUsers);
 router.get('/users/jobs/:typejob', usersController.getJobsByType);
 router.put('/users/me', authMiddleware.isAuthenticated, usersController.editUser);
-// router.get('/users/typesjob', authMiddleware.isAuthenticated, usersController.getEnumValues);
+// router.get('/users/typesjob', authMiddleware.isAuthenticated, usersController.getEnumValues); //componente de react mapbox
 
 
 //Message
@@ -40,8 +40,12 @@ router.post('/comment/:userId', authMiddleware.isAuthenticated, commentControlle
 router.delete('/comment/:commentId', authMiddleware.isAuthenticated, commentController.deleteComment)
 
 //LIKES BY RATE
+router.post('/rate/:receiverId', authMiddleware.isAuthenticated, rateController.createRate);
 
-//componente de react mapbox
+
+
+
+
 
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const createError = require('http-errors')
 const { StatusCodes } = require('http-status-codes')
-const User = require("../models/user.model");
+const User = require("../models/User.model");
 
 module.exports.login = (req, res, next) => {
     const { email, password } = req.body;
@@ -45,3 +45,21 @@ module.exports.login = (req, res, next) => {
         })
         .catch(next)
 }
+
+module.exports.activate = (req, res, next) => {
+    const { token } = req.params;
+    console.log('Activation token received:', token);
+    User.findOneAndUpdate(
+        { activationToken: token },
+        { isActive: true },
+        { new: true }
+    )
+        .then((dbUser) => {
+            console.log('User activated:', dbUser);
+            res.json({ email: dbUser.email, message: 'Account activated successfully!' });
+        })
+        .catch((error) => {
+            console.error('Activation error:', error);
+            res.status(500).json({ error: 'Activation failed. Please try again.' });
+        });
+ }
