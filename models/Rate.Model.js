@@ -15,14 +15,6 @@ const rateSchema = new Schema(
             type: Number,
             min: 1,
             max: 5
-        },
-        score: {
-            type: {
-                total: Number, 
-                count: Number, 
-                average: Number 
-            },
-            default: { total: 0, count: 0, average: 0 }
         }
     },
     {

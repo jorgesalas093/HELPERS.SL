@@ -21,3 +21,50 @@ module.exports.createRate = (req, res, next) => {
         })
         .catch(next);
 };
+
+
+module.exports.getRate = (req, res, next) => {
+    const { receiverId } = req.params;
+
+    Rate.find({ receiverRate: receiverId })
+        .then(rates => {
+            if (rates.length === 0) {
+                return res.status(StatusCodes.NOT_FOUND).json({ message: 'No rates found for the receiver' });
+            }
+        
+            const totalRate = rates.reduce((accumulator, rate) => {
+                return accumulator + rate.rate;
+            }, 0);
+            
+            const averageRate = totalRate / rates.length;
+            
+
+            res.status(StatusCodes.OK).json({ rates, score: averageRate });
+
+        })
+        .catch(error => {
+            console.error('Error fetching rates:', error);
+            next(error);
+        });
+};
+
+
+// module.exports.getRate = (req, res, next) => {
+//     const { receiverId } = req.params;
+
+//     Rate.find({ receiverRate: receiverId })
+//         .then(rates => {
+//             if (rates.length === 0) {
+//                 return res.status(StatusCodes.NOT_FOUND).json({ message: 'No rates found for the receiver' });
+//             }
+
+
+
+//             res.json({ rates, totalScore: 123 })
+
+//         })
+//         .catch(error => {
+//             console.error('Error fetching rates:', error);
+//             next(error);
+//         });
+// };

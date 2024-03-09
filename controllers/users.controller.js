@@ -2,8 +2,8 @@ const { StatusCodes } = require('http-status-codes');
 const createError = require('http-errors');
 const User = require("../models/User.model");
 const { populate } = require('../models/Comment.model');
-const {transporter, createEmailTemplate} = require('../config/nodemailar.config')
-
+const { transporter, createEmailTemplate } = require('../config/nodemailar.config')
+const JOBS_ENUM = ['CARER', 'CARPENTER', 'LOOKSMITH', 'CHEF', 'TEACHER', 'ELECTRICIAN', 'PLUMBER', 'MESSENGER', 'FITTER', 'CLOSET ORGANIZER', 'HOME CLEANER', 'GERDENER', 'PAINTER', 'BRICKWORK', 'WELDER']
 module.exports.create = (req, res, next) => {
     const userToCreate = {
         ...req.body,
@@ -95,14 +95,8 @@ module.exports.editUser = (req, res, next) => {
         });
 }
 
-// module.exports.getEnumValues = (req, res, next) => {
-//     userSchema
-//         .path('typejob')
-//         .enumValues
-//         .then(enumValues => {
-//             res.json({ typejobEnum: enumValues });
-//         })
-//         .catch(error => {
-//             next(error);
-//         });
-// };
+//PARA EL PUT, MANDAR EL BODY AND ID, Y UTILIZAR FIND BY ID AND UPDATE
+
+module.exports.getEnumValues = (req, res, next) => {
+    res.json(JOBS_ENUM)
+};

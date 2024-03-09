@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const ROUNDS = 10;
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
+const JOBS_ENUM = ['CARER', 'CARPENTER', 'LOOKSMITH', 'CHEF', 'TEACHER', 'ELECTRICIAN', 'PLUMBER', 'MESSENGER', 'ASSEMBLER', 'CLOSET ORGANIZER', 'HOME CLEANER', 'GERDENER', 'PAINTER', 'BRICKWORK', 'WELDER']
 const userSchema = mongoose.Schema(
     {
         username: {
@@ -46,13 +46,13 @@ const userSchema = mongoose.Schema(
             type: String,
             default: 'https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png'
         },
-       
+
         typejob: {
             type: [String],
             requiere: false,
             default: [],
-            enum: ['CARER', 'CARPENTER', 'LOOKSMITH', 'CHEF', 'TEACHER', 'ELECTRICIAN', 'PLUMBER', 'MESSENGER', 'FITTER', 'CLOSET ORGANIZER', 'HOME CLEANER', 'GERDENER', 'PAINTER', 'BRICKWORK', 'WELDER']
-        }, 
+            enum: JOBS_ENUM,
+        },
         activationToken: {
             type: String,
             default: () => {
@@ -66,7 +66,7 @@ const userSchema = mongoose.Schema(
             type: Boolean,
             default: false,
         },
-//imput type check box (primero probar con uno normal)
+        //imput type check box (primero probar con uno normal)
     },
     {
 

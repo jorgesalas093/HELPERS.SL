@@ -17,12 +17,13 @@ router.get("/activate/:token", authController.activate);
 
 // Users
 router.get('/users/me', authMiddleware.isAuthenticated, usersController.getCurrentUser)
+router.get('/users/typesjob', authMiddleware.isAuthenticated, usersController.getEnumValues); //componente de react mapbox
 router.get('/users/:id', authMiddleware.isAuthenticated, usersController.getUser)
 router.post('/users', upload.single('avatar'), usersController.create);
 router.get('/users', usersController.getAllJobsUsers);
 router.get('/users/jobs/:typejob', usersController.getJobsByType);
 router.put('/users/me', authMiddleware.isAuthenticated, usersController.editUser);
-// router.get('/users/typesjob', authMiddleware.isAuthenticated, usersController.getEnumValues); //componente de react mapbox
+
 
 
 //Message
@@ -40,6 +41,7 @@ router.post('/comment/:userId', authMiddleware.isAuthenticated, commentControlle
 router.delete('/comment/:commentId', authMiddleware.isAuthenticated, commentController.deleteComment)
 
 //LIKES BY RATE
+router.get('/rate/:receiverId', rateController.getRate);
 router.post('/rate/:receiverId', authMiddleware.isAuthenticated, rateController.createRate);
 
 
