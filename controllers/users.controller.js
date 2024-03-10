@@ -4,6 +4,8 @@ const User = require("../models/User.model");
 const { populate } = require('../models/Comment.model');
 const { transporter, createEmailTemplate } = require('../config/nodemailar.config')
 const JOBS_ENUM = ['CARER', 'CARPENTER', 'LOOKSMITH', 'CHEF', 'TEACHER', 'ELECTRICIAN', 'PLUMBER', 'MESSENGER', 'FITTER', 'CLOSET ORGANIZER', 'HOME CLEANER', 'GERDENER', 'PAINTER', 'BRICKWORK', 'WELDER']
+
+
 module.exports.create = (req, res, next) => {
     const userToCreate = {
         ...req.body,
@@ -83,19 +85,37 @@ module.exports.getUser = (req, res, next) => {
 }
 
 
-module.exports.editUser = (req, res, next) => {
-    const { avatar } = req.body;
 
-    User.findByIdAndUpdate(req.currentUserId, { avatar }, { new: true })
+
+//PARA EL PUT, MANDAR EL BODY AND ID, Y UTILIZAR FIND BY ID AND UPDATE
+module.exports.editUser = (req, res, next) => {
+    const { avatar, username, email, password, biography, birthday, typejob } = req.body;
+    const { currentUserId } = req;
+
+
+    const updateFields = {};
+    if (avatar) updateFields.avatar = avatar;
+    if (username) updateFields.username = username;
+    if (email) updateFields.email = email;
+    if (password) updateFields.password = password;
+    // if (role) updateFields.role = role; //SOLO SI SE HACE ADMIN VIEW
+    if (biography) updateFields.biography = biography;
+    if (birthday) updateFields.birthday = birthday;
+    if (typejob) updateFields.typejob = typejob;
+
+    User.findByIdAndUpdate(currentUserId, updateFields, { new: true })
         .then(updatedUser => {
+            if (!updatedUser) {
+                return res.status(404).json({ message: 'User not found' });
+            }
             res.json(updatedUser);
         })
         .catch(error => {
+            console.error('Error updating user:', error);
             next(error);
         });
-}
+};
 
-//PARA EL PUT, MANDAR EL BODY AND ID, Y UTILIZAR FIND BY ID AND UPDATE
 
 module.exports.getEnumValues = (req, res, next) => {
     res.json(JOBS_ENUM)

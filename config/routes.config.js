@@ -15,6 +15,8 @@ const upload = require('./storage.config');
 router.post('/login', authController.login);
 router.get("/activate/:token", authController.activate);
 
+
+//click outsite ----BUSCAR ESO PARA EL CHAT EN FRONT
 // Users
 router.get('/users/me', authMiddleware.isAuthenticated, usersController.getCurrentUser)
 router.get('/users/typesjob', authMiddleware.isAuthenticated, usersController.getEnumValues); //componente de react mapbox

@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const ROUNDS = 10;
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const JOBS_ENUM = ['CARER', 'CARPENTER', 'LOOKSMITH', 'CHEF', 'TEACHER', 'ELECTRICIAN', 'PLUMBER', 'MESSENGER', 'ASSEMBLER', 'CLOSET ORGANIZER', 'HOME CLEANER', 'GERDENER', 'PAINTER', 'BRICKWORK', 'WELDER']
+const JOBS_ENUM = ['Carer', 'Carpenter', 'Looksmith', 'Chef', 'Teacher', 'Electrician', 'Plumber', 'Messenger', 'Assembler', 'Closet Organizer', 'Home Cleaner', 'Gerdener', 'Painter', 'Brickwork', 'Welder']
 const userSchema = mongoose.Schema(
     {
         username: {
