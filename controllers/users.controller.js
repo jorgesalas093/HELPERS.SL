@@ -67,7 +67,7 @@ module.exports.getAllJobsUsers = (req, res, next) => {
 }
 
 module.exports.getJobsByType = (req, res, next) => {
-    const typejob = req.params.typejob.toUpperCase();
+    const typejob = req.params.typejob.toLowerCase();
 
     User.find({ typejob: { $in: [typejob] } })
         .then(users => {
