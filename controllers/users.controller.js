@@ -3,7 +3,7 @@ const createError = require('http-errors');
 const User = require("../models/User.model");
 const { populate } = require('../models/Comment.model');
 const { transporter, createEmailTemplate } = require('../config/nodemailar.config')
-const JOBS_ENUM = ['CARER', 'CARPENTER', 'LOOKSMITH', 'CHEF', 'TEACHER', 'ELECTRICIAN', 'PLUMBER', 'MESSENGER', 'FITTER', 'CLOSET ORGANIZER', 'HOME CLEANER', 'GERDENER', 'PAINTER', 'BRICKWORK', 'WELDER']
+const JOBS_ENUM = ['Carer', 'Carpenter', 'Brickwork', 'Chef', 'Closet Organizer', 'Electrician', 'Assembler', 'Gardener', 'Home Cleaner', 'Locksmith', 'Messenger', 'Painter', 'Plumber', 'Teacher', 'Welder']
 
 
 module.exports.create = (req, res, next) => {
