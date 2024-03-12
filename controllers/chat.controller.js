@@ -20,24 +20,6 @@ module.exports.createChat = (req, res, next) => {
 
 }
 
-// module.exports.allChats = (req, res, next) => {
-//     Chat.find({ users: { $in: [req.currentUserId] } })
-//         .populate('users')
-//         .populate({
-//             path: 'messages',
-//             populate: {
-//                 path: 'user',
-//                 select: '-password' // Si deseas excluir la contraseña del usuario
-//             }
-//         })
-//         .then(chats => {
-
-//             res.json(chats);
-//         })
-//         .catch(error => {
-//             next(error);
-//         });
-// }
 
 module.exports.allChats = (req, res, next) => {
     Chat.find({ users: { $in: [req.currentUserId] } }) // Solo obtenemos los _id de los chats

@@ -12,9 +12,8 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-        //CAMBIAR EL NOMBRE
-        folder: "ironhack/tweethack",
-        allowedFormats: ["jpg", "png"],
+        folder: "ironhack/helpers",
+        allowedFormats: ["jpg", "png", "jpeg"],
     },
 });
 

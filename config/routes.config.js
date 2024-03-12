@@ -19,7 +19,9 @@ router.get("/activate/:token", authController.activate);
 //click outsite ----BUSCAR ESO PARA EL CHAT EN FRONT
 // Users
 router.get('/users/me', authMiddleware.isAuthenticated, usersController.getCurrentUser)
-router.get('/users/typesjob', authMiddleware.isAuthenticated, usersController.getEnumValues); //componente de react mapbox
+
+router.get('/users/typesjob', authMiddleware.isAuthenticated, usersController.getEnumValues);
+router.delete('/users/:id', authMiddleware.isAuthenticated, usersController.deleteCurrentUser)
 router.get('/users/:id', authMiddleware.isAuthenticated, usersController.getUser)
 router.post('/users', upload.single('avatar'), usersController.create);
 router.get('/users', usersController.getAllJobsUsers);

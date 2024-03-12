@@ -80,6 +80,19 @@ module.exports.getCurrentUser = (req, res, next) => {
     getUser(req.currentUserId, req, res, next);
 }
 
+module.exports.deleteCurrentUser = (id, req, res, next) => {
+    User.findByIdAndDelete(id)
+        .then(user => {
+            if (!user) {
+                next(createError(StatusCodes.NOT_FOUND, 'User not found'))
+            } else {
+                res.json("user delete")
+            }
+        })
+        .catch(next)
+}
+
+
 module.exports.getUser = (req, res, next) => {
     getUser(req.params.id, req, res, next)
 }
@@ -98,10 +111,9 @@ module.exports.editUser = (req, res, next) => {
     if (username) updateFields.username = username;
     if (email) updateFields.email = email;
     if (password) updateFields.password = password;
-    // if (role) updateFields.role = role; //SOLO SI SE HACE ADMIN VIEW
     if (biography) updateFields.biography = biography;
     if (birthday) updateFields.birthday = birthday;
-    if (typejob) updateFields.typejob = typejob;
+    if (typejob) updateFields.typejob = typejob.split(' ');
 
     User.findByIdAndUpdate(currentUserId, updateFields, { new: true })
         .then(updatedUser => {
