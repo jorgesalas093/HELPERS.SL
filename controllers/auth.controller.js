@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const createError = require('http-errors')
 const { StatusCodes } = require('http-status-codes')
-const User = require("../models/User.model");
+const User = require("../models/user.model");
 
 module.exports.login = (req, res, next) => {
     const { email, password } = req.body;
@@ -62,4 +62,4 @@ module.exports.activate = (req, res, next) => {
             console.error('Activation error:', error);
             res.status(500).json({ error: 'Activation failed. Please try again.' });
         });
- }
+}
