@@ -21,9 +21,9 @@ router.get("/activate/:token", authController.activate);
 router.get('/users/me', authMiddleware.isAuthenticated, usersController.getCurrentUser)
 
 router.get('/users/typesjob', authMiddleware.isAuthenticated, usersController.getEnumValues);
+router.post('/users', upload.single('avatar'), usersController.create);
 router.delete('/users/:id', authMiddleware.isAuthenticated, usersController.deleteCurrentUser)
 router.get('/users/:id', authMiddleware.isAuthenticated, usersController.getUser)
-router.post('/users', upload.single('avatar'), usersController.create);
 router.get('/users', usersController.getAllJobsUsers);
 router.get('/users/jobs/:typejob', usersController.getJobsByType);
 router.put('/users/me', authMiddleware.isAuthenticated, usersController.editUser);

@@ -80,17 +80,21 @@ module.exports.getCurrentUser = (req, res, next) => {
     getUser(req.currentUserId, req, res, next);
 }
 
-module.exports.deleteCurrentUser = (id, req, res, next) => {
-    User.findByIdAndDelete(id)
+module.exports.deleteCurrentUser = (req, res, next) => {
+    const userId = req.params.id; // Obtener el ID del usuario de los parámetros de la solicitud
+    User.findByIdAndDelete(userId) // Utilizar el ID obtenido para buscar y eliminar el usuario
         .then(user => {
             if (!user) {
-                next(createError(StatusCodes.NOT_FOUND, 'User not found'))
+                // Si no se encuentra el usuario, responder con un error 404
+                res.status(404).json({ error: 'User not found' });
             } else {
-                res.json("user delete")
+                // Si el usuario se elimina correctamente, responder con un estado 200 y un mensaje JSON
+                res.status(200).json({ message: 'User deleted successfully' });
             }
         })
-        .catch(next)
-}
+        .catch(next); // Pasar cualquier error a middleware de manejo de errores
+};
+
 
 
 module.exports.getUser = (req, res, next) => {
@@ -102,20 +106,16 @@ module.exports.getUser = (req, res, next) => {
 
 //PARA EL PUT, MANDAR EL BODY AND ID, Y UTILIZAR FIND BY ID AND UPDATE
 module.exports.editUser = (req, res, next) => {
-    const { avatar, username, email, password, biography, birthday, typejob } = req.body;
+    // const { avatar, username, email, password, biography, birthday, typejob } = req.body;
+    console.log("<<<<<<<<<<<<<<<<<<<<<<<<<", req.body)
     const { currentUserId } = req;
 
 
-    const updateFields = {};
-    if (avatar) updateFields.avatar = avatar;
-    if (username) updateFields.username = username;
-    if (email) updateFields.email = email;
-    if (password) updateFields.password = password;
-    if (biography) updateFields.biography = biography;
-    if (birthday) updateFields.birthday = birthday;
-    if (typejob) updateFields.typejob = typejob.split(' ');
+    if (req.body.password) {
+        delete req.body.password
+    }
 
-    User.findByIdAndUpdate(currentUserId, updateFields, { new: true })
+    User.findByIdAndUpdate(currentUserId, req.body, { new: true })
         .then(updatedUser => {
             if (!updatedUser) {
                 return res.status(404).json({ message: 'User not found' });
