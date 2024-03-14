@@ -2,7 +2,7 @@ const { StatusCodes } = require('http-status-codes');
 const createError = require('http-errors');
 const User = require("../models/user.model");
 const { populate } = require('../models/Comment.model');
-const { transporter, createEmailTemplate } = require('../config/nodemailar.config')
+const { transporter, createEmailTemplate } = require('../config/nodemailer.config')
 const JOBS_ENUM = ['Carer', 'Carpenter', 'Brickwork', 'Chef', 'Closet Organizer', 'Electrician', 'Assembler', 'Gardener', 'Home Cleaner', 'Locksmith', 'Messenger', 'Painter', 'Plumber', 'Teacher', 'Welder']
 
 

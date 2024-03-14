@@ -61,9 +61,9 @@ module.exports.createEmailTemplate = (user) => {
             <div class="content">
                 <h2>Helpers</h2>
                 <p>Te ayudamos a que te ayuden</p>
-                <div class="image-container">
-                    <img src="https://example.com/handshake_image.png" alt="Handshake Image">
-                </div>
+                // <div class="image-container">
+                //     <img src="https://example.com/handshake_image.png" alt="Handshake Image">
+                // </div>
                 <p>Activa tu cuenta haciendo clic en el siguiente enlace:</p>
                 <p><a href="https://helpers-sl.netlify.app/activate/${user.activationToken}" target="_blank">Activar cuenta</a></p>
             </div>
