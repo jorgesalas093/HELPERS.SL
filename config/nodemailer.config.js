@@ -59,14 +59,14 @@ module.exports.createEmailTemplate = (user) => {
                 <h1>Bienvenido ${user.username}</h1>
             </div>
             <div class="content">
-                <h2>Helpers</h2>
+                <h2>Helpers SL</h2>
                 <p>Te ayudamos a que te ayuden</p>
-                // <div class="image-container">
-                //     <img src="https://example.com/handshake_image.png" alt="Handshake Image">
+                <div class="image-container">
+                    <img src="https://res.cloudinary.com/dwahroldl/image/upload/v1708512110/HelpersLogo/wrqgjyqqk72pteu7r3yg.jpg" alt="Logo Helpers SL">
                 // </div>
                 <p>Activa tu cuenta haciendo clic en el siguiente enlace:</p>
                 <p><a href="https://helpers-sl.netlify.app/activate/${user.activationToken}" target="_blank">Activar cuenta</a></p>
-            </div>
+                </div>
             <div class="footer">
                 <p>WEB</p>
             </div>
