@@ -37,13 +37,13 @@ const userSchema = mongoose.Schema(
             default: '',
             maxlength: 250
         },
-        /*
+        
         birthday: {
             type: Date,
             requiered: false,
             unique: false,
         },
-        */
+        
         avatar: {
             type: String,
             default: 'https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png'
